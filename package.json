@@ -1,0 +1,12 @@
+{
+  "name": "search-overflow",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "ejs": "^1.0.0",
+    "express": "~3.2.6",
+    "q": "^1.0.1",
+    "socket.io": "^1.1.0",
+    "solr-client": "^0.4.0"
+  }
+}
