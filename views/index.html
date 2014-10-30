@@ -1,46 +1,70 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="myApp" class="no-js">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>DAPI</title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>DAPI</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"/>
-  <link rel="stylesheet" href="css/app.css"/>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"/>
+
+    <link rel="stylesheet" href="css/app.css"/>
+
 </head>
-<body>
-  <div ng-controller='AppCtrl'>
+<body ng-controller='AppCtrl'>
+<div class="container-fluid">
+    <div class="row" style="padding-left: 10px">
+        <h1>SearchOverflow</h1>
+
+        <hr>
+
+        <div class="container">
+            <div id="custom-search-input">
+                <div class="input-group col-md-12">
+                    <input type="text" class="  search-query form-control" placeholder="Search"/>
+                <span class="input-group-btn">
+                    <button class="btn btn-danger" type="button">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </button>
+                </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
     <h2> Hello </h2>
     <ul class="menu">
-      <li>
-        <a href='view1'> view1</a>
-      </li>
-      <li>
-        <a href='view2'> view2</a>
-      </li>
+        <li>
+            <a href='view1'> view1</a>
+        </li>
+        <li>
+            <a href='view2'> view2</a>
+        </li>
     </ul>
     <div ng-view>
 
     </div>
+</div>
 
 
-  <!-- In production use:
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
-  -->
-  <script src="bower_components/angular/angular.min.js"></script>
-  <script src="bower_components/angular-route/angular-route.min.js"></script>
- <!-- socket.io client code -->
-  <script src="./socket.io/socket.io.js"></script>
-  <!--another option is: <script src="bower_components/socket.io-client/socket.io.js"></script> -->
+<!-- In production use:
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
+-->
+<script src="bower_components/angular/angular.min.js"></script>
+<script src="bower_components/angular-route/angular-route.min.js"></script>
+<!-- socket.io client code -->
+<script src="./socket.io/socket.io.js"></script>
+<!--another option is: <script src="bower_components/socket.io-client/socket.io.js"></script> -->
 
-  <!-- Brian Fords module for using Socket.io with Angular -->
-  <script src="bower_components/angular-socket-io/socket.js"></script>
-  <script src="js/app.js"></script>
-  <script src="js/services.js"></script>
-  <script src="js/controllers.js"></script>
-  <script src="js/filters.js"></script>
-  <script src="js/directives.js"></script>
+<!-- Brian Fords module for using Socket.io with Angular -->
+<script src="bower_components/angular-socket-io/socket.js"></script>
+<script src="js/app.js"></script>
+<script src="js/services.js"></script>
+<script src="js/controllers.js"></script>
+<script src="js/filters.js"></script>
+<script src="js/directives.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
 </body>
 </html>
