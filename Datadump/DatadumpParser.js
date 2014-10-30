@@ -35,6 +35,7 @@ function main() {
         getDatadumpFiles().then(function(files) {
         var filesToUpload = [];
         files.forEach(function(file) {
+            if(file === 'TagsSolr.xml')
             filesToUpload.push(uploadFile(file).then(function(){
                 console.log(file + ' uploaded.');
             }));

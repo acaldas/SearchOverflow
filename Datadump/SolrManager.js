@@ -6,7 +6,7 @@ var sorlPath = 'D:\\Transferências\\solr-4.10.1\\solr-4.10.1\\example';
 var solrCommand = 'java -jar start.jar';
 var solrIp = '127.0.0.1';
 var solrPort = 8983;
-var solrCore = 'collection1';
+var solrCore = 'tags';
 
 var solrClient = null;
 var solrProcess = null;
@@ -61,7 +61,7 @@ exports.uploadFile = function(filePath, format, contentType) {
         format: format,
         contentType: contentType
     }
-
+    try {
     setTimeout(function(){
         createSolrClient().then(function() {
         var request = solrClient.addRemoteResource(options, function(err, obj) {
@@ -77,7 +77,9 @@ exports.uploadFile = function(filePath, format, contentType) {
         deferred.reject(error);
     });
     }, 3000);
-
+} catch( error ) {
+    console.log("Upload error: " + error);
+}
 
     return deferred.promise;
 };
