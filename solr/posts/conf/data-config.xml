@@ -1,0 +1,25 @@
+<dataConfig>
+<dataSource type="FileDataSource" encoding="UTF-8" />
+    <document>
+        <entity name="post" processor="XPathEntityProcessor"
+        stream="true" forEach="/posts/row/" url="D:\Transferências\stackexchange\datadump\Posts.xml">
+            <field column="id" xpath="/posts/row/@Id" />
+            <field column="PostTypeId" xpath="/posts/row/@PostTypeId"/>
+           <field column="AcceptedAnswerId" xpath="/posts/row/@AcceptedAnswerId"/>
+           <field column="ParentID" xpath="/posts/row/@ParentID"/>
+           <field column="CreationDate" xpath="/posts/row/@CreationDate"/>
+           <field column="Score" xpath="/posts/row/@Score"/>
+           <field column="ViewCount" xpath="/posts/row/@ViewCount"/>
+           <field column="Body" xpath="/posts/row/@Body"/>
+           <field column="OwnerUserId" xpath="/posts/row/@OwnerUserId"/>
+           <field column="OwnerDisplayName" xpath="/posts/row/@OwnerDisplayName"/>
+           <field column="LastActivityDate" xpath="/posts/row/@LastActivityDate"/>
+           <field column="Title" xpath="/posts/row/@Title"/>
+           <field column="Tags" xpath="/posts/row/@Tags"/>
+           <field column="AnswerCount" xpath="/posts/row/@AnswerCount"/>
+           <field column="CommentCount" xpath="/posts/row/@CommentCount"/>
+           <field column="FavoriteCount" txpath="/posts/row/@FavoriteCount"/>
+           <field column="CreationDate" xpath="/posts/row/@CreationDate"/>
+        </entity>
+    </document>
+</dataConfig>

@@ -1,0 +1,3 @@
+Cores para adicionar na pasta Solr-4.10.1/example/solr.
+
+Na dashboard criar cores com o mesmo nome.

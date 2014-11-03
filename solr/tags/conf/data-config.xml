@@ -1,0 +1,16 @@
+<dataConfig>
+<dataSource type="FileDataSource" encoding="UTF-8" />
+    <document>
+        <entity name="tag" processor="XPathEntityProcessor"
+        stream="true" forEach="/tags/row/" url="D:\Transferências\stackexchange\datadump\Tags.xml" transformer="RegexTransformer">
+            <field column="id" xpath="/tags/row/@Id" />
+            <field column="TagName" xpath="/tags/row/@Name" />
+            <field column="Count" xpath="/tags/row/@Count"
+            />
+            <field column="ExcerptPostId" xpath="/tags/row/@ExcerptPostId"
+            />
+            <field column="WikiPostId" xpath="/tags/row/@ExcerptPostId"
+            />
+        </entity>
+    </document>
+</dataConfig>

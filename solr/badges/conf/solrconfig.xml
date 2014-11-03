@@ -83,7 +83,6 @@
 
   <lib dir="../../../contrib/velocity/lib" regex=".*\.jar" />
   <lib dir="../../../dist/" regex="solr-velocity-\d.*\.jar" />
-  <lib dir="../../../dist/" regex="solr-dataimporthandler-\d.*\.jar" />
 
   <!-- an exact 'path' can be used instead of a 'dir' to specify a
        specific jar file.  This will cause a serious error to be logged
@@ -826,19 +825,12 @@
 
     -->
 
-         <!-- XSLT Update Request Handler
+     <!-- XSLT Update Request Handler
        Transforms incoming XML with stylesheet identified by tr=
   -->
   <requestHandler name="/update/xslt"
                    startup="lazy"
                    class="solr.XsltUpdateRequestHandler"/>
-
-  <requestHandler name="/dataimport" class="org.apache.solr.handler.dataimport.DataImportHandler">
-    <lst name="defaults">
-    <str name="config">data-config.xml</str>
-    </lst>
-  </requestHandler>
-
   <!-- SearchHandler
 
        http://wiki.apache.org/solr/SearchHandler
