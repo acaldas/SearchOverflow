@@ -1,12 +1,16 @@
 var Q = require("q");
 var solr = require('solr-client');
 var exec = require('child_process').exec;
-
+var _ = require('underscore');
 var sorlPath = 'D:\\Transferências\\solr-4.10.1\\solr-4.10.1\\example';
 var solrCommand = 'java -jar start.jar';
 var solrIp = '127.0.0.1';
 var solrPort = 8983;
-var solrCore = 'tags';
+var solrCore = 'badges';
+
+var fs = require('fs');
+//var bigXml = require('big-xml');
+
 
 var solrClient = null;
 var solrProcess = null;
@@ -21,16 +25,17 @@ exports.startSolr = function() {
         try {
             console.log("Starting solr");
             solrProcess = exec(solrCommand, {
-                cwd: sorlPath
+                cwd: sorlPath,
+                maxBuffer: 1024 * 500
             }, function(error, stdout, stderr) {
                 if (error)
                     throw error;
             });
 
             solrProcess.stdout.on('data', function(data) {
-                setTimeout(function(){deferred.resolve()},
-                    3000);
-                //give time for Solr to initiate, better way?
+                if (!solrClient)
+                    createSolrClient().then(function() {
+                        pingUntilSuccess(deferred);
             });
 
             solrProcess.on('error', function(code) {
@@ -50,39 +55,19 @@ exports.startSolr = function() {
     return deferred.promise;
 };
 
-exports.uploadFile = function(filePath, format, contentType) {
-    var deferred = Q.defer();
-
-    format = format || 'xml';
-    contentType = contentType || 'application/xml;charset=utf-8';
-
-    var options = {
-        path: filePath,
-        format: format,
-        contentType: contentType
-    }
-    try {
-    setTimeout(function(){
-        createSolrClient().then(function() {
-        var request = solrClient.addRemoteResource(options, function(err, obj) {
-            if (err) {
-                console.log('Error uploading file: ' + err);
-                deferred.reject(err);
-            } else {
-                deferred.resolve();
-            }
-        });
-    }, function(error) {
-        console.log("Error: " + error);
-        deferred.reject(error);
+function pingUntilSuccess(deferred) {
+    solrClient.ping(function(err, obj) {
+        if (err) {
+            console.log(err);
+            setTimeout(function() {
+                pingUntilSuccess(deferred)
+            }, 500);
+        } else {
+            console.log(obj);
+            deferred.resolve();
+        }
     });
-    }, 3000);
-} catch( error ) {
-    console.log("Upload error: " + error);
 }
-
-    return deferred.promise;
-};
 
 function createSolrClient() {
     var deferred = Q.defer();
@@ -97,9 +82,125 @@ function createSolrClient() {
 
         } catch (error) {
             console.log("Error: " + error);
+            deferred.reject();
         }
     }
 
 
     return deferred.promise;
 }
+
+/*
+exports.uploadFile = function(filePath, format, contentType) {
+    var deferred = Q.defer();
+
+    function transformRow(row) {
+        var item = {};
+
+        _.each(row.attrs, function(value, key) {
+
+            if (key === 'Id')
+                key = 'id'
+            else if (key === 'Date')
+                value += 'Z';
+
+            item[key] = value;
+        });
+        return item;
+    }
+    try {
+        setTimeout(function() {
+            createSolrClient().then(function() {
+                var fileStream = createFileStream(filePath);
+
+                var solrStream = solrClient.createAddStream()
+                    .on('error', function(error) {
+                        console.log("Error: " + error);
+                    })
+                    .on('end', function() {
+                        console.log('File imported.');
+                    });
+
+                fileStream.on('record', function(record) {
+                    solrStream.write(transformRow(record));
+                })
+            })
+        }, 3000);
+    } catch (exception) {
+        console.log("Exception: " + exception);
+    }
+
+    // format = format || 'xml';
+    // contentType = contentType || 'application/xml;charset=utf-8';
+
+    // var options = {
+    //     path: filePath,
+    //     format: format,
+    //     contentType: contentType,
+    //     parameters: {
+
+    //     }
+    // }
+
+    // if (format === 'xslt')
+    //     options.parameters.tr = 'transformStackoverflow.xsl'
+    // try {
+    //     setTimeout(function() {
+    //         createSolrClient().then(function() {
+    //             var request = solrClient.addRemoteResource(options, function(err, obj) {
+    //                 if (err) {
+    //                     console.log('Error uploading file: ' + err);
+    //                     deferred.reject(err);
+    //                 } else {
+    //                     console.log(obj);
+    //                     deferred.resolve();
+    //                 }
+    //             });
+
+    //         }, function(error) {
+    //             console.log("Error: " + error);
+    //             deferred.reject(error);
+    //         });
+    //     }, 3000);
+    // } catch (error) {
+    //     console.log("Upload error: " + error);
+    // }
+
+    return deferred.promise;
+};
+
+
+function createFileStream(xmlPath, callback, promise) {
+
+    try {
+        var reader = bigXml.createReader(xmlPath, /^(Badges|row)$/, {});
+        var counter = 0;
+        var a = new Date();
+        reader.on('record', function(record) {
+            counter++;
+
+            if (counter % 10000 === 0) {
+                var b = new Date();
+                console.log(counter + ': ' + (b - a) / 1000 + ' seconds');
+                a = b;
+            }
+
+        });
+
+        reader.on('error', function(record) {
+            console.log('error: ' + record);
+        });
+
+        reader.on('end', function() {
+            console.log('end');
+        });
+
+    } catch (error) {
+        console.log("Exception: " + error);
+        throw error;
+    }
+
+    return reader;
+
+}
+*/

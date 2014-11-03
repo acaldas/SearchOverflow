@@ -21,9 +21,9 @@ function getDatadumpFiles() {
     return deferred.promise;
 }
 
-function uploadFile(fileName) {
+function uploadFile(fileName, format) {
     console.log("Uploading " + fileName);
-    return solrManager.uploadFile(datadumpPath + '\\' + fileName);
+    return solrManager.uploadFile(datadumpPath + '\\' + fileName, format);
 }
 
 
@@ -35,8 +35,8 @@ function main() {
         getDatadumpFiles().then(function(files) {
         var filesToUpload = [];
         files.forEach(function(file) {
-            if(file === 'TagsSolr.xml')
-            filesToUpload.push(uploadFile(file).then(function(){
+            if(file === 'Badgasdes.xml')
+            filesToUpload.push(uploadFile(file,'xslt').then(function(){
                 console.log(file + ' uploaded.');
             }));
         });
