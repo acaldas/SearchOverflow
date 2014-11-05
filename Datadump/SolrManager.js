@@ -6,7 +6,7 @@ var sorlPath = 'D:\\Transferências\\solr-4.10.1\\solr-4.10.1\\example';
 var solrCommand = 'java -jar start.jar';
 var solrIp = '127.0.0.1';
 var solrPort = 8983;
-var solrCore = 'badges';
+var solrCore = 'posts';
 
 var fs = require('fs');
 //var bigXml = require('big-xml');
@@ -125,13 +125,12 @@ function createSolrClient() {
 exports.querySolr = function(query) {
     var deferred = Q.defer();
 
-    var query2 = client.createQuery()
-        .q({
-            Title: 'laptop'
-        })
+    var query2 = solrClient.createQuery()
+        .set(encodeURI('q=Title:' + query + ' OR Body:' + query))
         .start(0)
         .rows(10);
-    client.search(query2, function(err, obj) {
+
+    solrClient.search(query2, function(err, obj) {
         if (err) {
             deferred.reject();
             console.log(err);

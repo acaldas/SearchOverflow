@@ -12,19 +12,17 @@ exports.socket = function socket(socket) {
         }
     });
 
+
     socket.on('solr:query', function(query) {
-        var promise = solrClient.querySolr(query);
 
-        promise.then(function(result) {
+        solrClient.querySolr(query).then(function(result) {
             socket.emit('solr:queryResult', result);
-        }
+        });
     });
-};
-
-exports.solrReady= function(solr) {
-    solrClient = solr;
-    if(solrClient)
-        socket.emit('solr:ready');
 }
 
-
+exports.solrReady = function(solr) {
+    solrClient = solr;
+    if (solrClient)
+        socket.emit('solr:ready');
+}
