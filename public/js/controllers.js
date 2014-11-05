@@ -3,38 +3,39 @@
 /* Controllers */
 
 angular.module('myApp.controllers', []).
-controller('AppCtrl', function($scope) {
+    controller('AppCtrl', function ($scope) {
 
-}).
-controller('MyCtrl1', function($scope, $http, socket, solrClient) {
-  $http({
-    method: 'GET',
-    url: '/api/name',
-    cache: true
-  }).
-  success(function(data, status, headers, config) {
-    console.log("REST: " + data.name);
-    $scope.name = data.name;
-  });
+    }).
+    controller('MyCtrl1', function ($scope, $http, socket, solrClient) {
+        $http({
+            method: 'GET',
+            url: '/api/name',
+            cache: true
+        }).
+            success(function (data, status, headers, config) {
+                console.log("REST: " + data.name);
+                $scope.name = data.name;
+            });
 
-  socket.on('send:name', function(data) {
-    console.log("Socket: " + data.name);
-    $scope.name = data.name;
-  });
+        socket.on('send:name', function (data) {
+            console.log("Socket: " + data.name);
+            $scope.name = data.name;
+        });
 
-  $scope.queryPost = function(query) {
-    solrClient.then(function(solrServices) {
-      console.log('Init: ' + solrServices.test);
+        $scope.queryPost = function (query) {
+            console.log(query);
+            solrClient.then(function (solrServices) {
+                console.log('Init: ' + solrServices.test);
 
-      solrServices.queryPost(query).then(function(result) {
-        console.log(result);
-      });
+                solrServices.queryPost(query).then(function (result) {
+                    console.log(result);
+                });
 
+            });
+
+        }
+
+    }).
+    controller('MyCtrl2', function ($scope) {
+        // write Ctrl here
     });
-
-  }
-
-}).
-controller('MyCtrl2', function($scope) {
-  // write Ctrl here
-});
