@@ -2,7 +2,16 @@ var Q = require("q");
 var solr = require('solr-client');
 var exec = require('child_process').exec;
 var _ = require('underscore');
-var sorlPath = 'D:\\Transferências\\solr-4.10.1\\solr-4.10.1\\example';
+var sorlPath = function(){
+    var user = 0;
+    switch (user){
+        case 0:
+            return 'D:\\Transferências\\solr-4.10.1\\solr-4.10.1\\example';
+        case 1:
+            return '/home/vitor/solr/example';
+    }
+
+}
 var solrCommand = 'java -jar start.jar';
 var solrIp = '127.0.0.1';
 var solrPort = 8983;
