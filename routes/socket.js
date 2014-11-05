@@ -3,17 +3,28 @@
  */
 
 
-var isSolrReady = false;
+var solrClient = null;
 
 exports.socket = function socket(socket) {
     socket.on('solr:ask', function() {
-        if (isSolrReady) {
+        if (solrClient) {
             socket.emit('solr:ready');
+        }
+    });
+
+    socket.on('solr:query', function(query) {
+        var promise = solrClient.querySolr(query);
+
+        promise.then(function(result) {
+            socket.emit('solr:queryResult', result);
         }
     });
 };
 
-exports.solrReady= function() {
-    isSolrReady = true;
-    socket.emit('solr:ready');
+exports.solrReady= function(solr) {
+    solrClient = solr;
+    if(solrClient)
+        socket.emit('solr:ready');
 }
+
+

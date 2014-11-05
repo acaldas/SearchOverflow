@@ -3,24 +3,34 @@
 /* Services */
 
 angular.module('myApp.services', []).
-  factory('socket', function (socketFactory) {
+factory('socket', function(socketFactory) {
     return socketFactory();
-  }).
-  factory('solrClient', function(socket, $q) {
+}).
+factory('solrClient', function(socket, $q, $http) {
 
     var ready = false;
     var solrServices = {
-        test: "test"
+        queryPost: function(q) {
+            var deferred = $q.defer();
+
+            var url = 'http://localhost:8983/solr/#/posts/select';
+            socket.emit('solr:query', q);
+
+            socket.on('solr:queryResult', function(result) {
+                deferred.resolve(result);
+            });
+
+            return deferred.promise;
+        }
     };
 
     var init = function() {
         var deferred = $q.defer();
-        if(ready)
+        if (ready)
             deferred.resolve(solrServices);
         else {
-            console.log("Asking solr");
             socket.emit('solr:ask');
-            socket.on('solr:ready', function () {
+            socket.on('solr:ready', function() {
                 ready = true;
                 deferred.resolve(solrServices);
             });
@@ -33,5 +43,5 @@ angular.module('myApp.services', []).
 
 
 
-  }).
-  value('version', '0.1');
+}).
+value('version', '0.1');

@@ -6,7 +6,7 @@ module.exports = function api(solrClient, socket) {
 
     solrClient.startSolr().then(function(){
 
-        socket.solrReady();
+        socket.solrReady(solrClient);
     });
 
     this.name = function(req, res) {

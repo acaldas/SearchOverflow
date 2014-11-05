@@ -131,6 +131,30 @@ function createSolrClient() {
     return deferred.promise;
 }
 
+exports.querySolr = function(query) {
+    var deferred = Q.defer();
+
+    var query2 = client.createQuery()
+        .q({
+            Title: 'laptop'
+        })
+        .start(0)
+        .rows(10);
+    client.search(query2, function(err, obj) {
+        if (err) {
+            deferred.reject();
+            console.log(err);
+        } else {
+            deferred.resolve(obj);
+            console.log(obj);
+        }
+    });
+
+    return deferred.promise;
+}
+
+
+
 /*
 exports.uploadFile = function(filePath, format, contentType) {
     var deferred = Q.defer();
