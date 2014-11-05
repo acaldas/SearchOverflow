@@ -4,8 +4,9 @@
 
 var express = require('express'),
     routes = require('./routes'),
-    api = require('./routes/api'),
+    Api = require('./routes/api'),
     socket = require('./routes/socket.js'),
+    solrClient = require('./Datadump/SolrManager.js'),
     http = require('http'),
     path = require('path'),
     socketio = require('socket.io');
@@ -13,6 +14,8 @@ var express = require('express'),
 var app = module.exports = express();
 var server = require('http').createServer(app);
 var io = socketio.listen(server);
+solrClient.startSolr();
+var api = new Api(solrClient, socket);
 /**
  * Configuration
  */
@@ -57,7 +60,7 @@ app.get('*', routes.index);
  Socket.io Communication
  Handle all incoming connections in the connection event listener of the io.sockets object
 */
-io.sockets.on('connection', socket);
+io.sockets.on('connection', socket.socket);
 
 /**
  * Start Server

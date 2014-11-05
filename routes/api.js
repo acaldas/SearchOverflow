@@ -2,8 +2,16 @@
  * Serve JSON to our AngularJS client
  */
 
-exports.name = function (req, res) {
-  res.json({
-  	name: 'Bob'
-  });
-};
+module.exports = function api(solrClient, socket) {
+
+    solrClient.startSolr().then(function(){
+
+        socket.solrReady();
+    });
+
+    this.name = function(req, res) {
+        res.json({
+            name: 'Bob'
+        });
+    };
+}

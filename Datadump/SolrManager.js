@@ -11,59 +11,91 @@ var solrCore = 'badges';
 var fs = require('fs');
 //var bigXml = require('big-xml');
 
+var startSolr = false
 
 var solrClient = null;
 var solrProcess = null;
+var startSolrPromise = null;
 
 exports.startSolr = function() {
     var deferred = Q.defer();
 
-    if (solrProcess) {
-        console.log("Solr already running");
-        deferred.resolve(solrProcess);
-    } else {
-        try {
-            console.log("Starting solr");
-            solrProcess = exec(solrCommand, {
-                cwd: sorlPath,
-                maxBuffer: 1024 * 500
-            }, function(error, stdout, stderr) {
-                if (error)
-                    throw error;
-            });
 
-            solrProcess.stdout.on('data', function(data) {
-                if (!solrClient)
-                    createSolrClient().then(function() {
-                        pingUntilSuccess(deferred);
+    if (!startSolr)
+        if (solrClient)
+            deferred.resolve();
+        else
+            createSolrClient().then(function() {
+                deferred.resolve();
             });
+    else {
+        if (startSolrPromise) {
+            return startSolrPromise;
+        } else if (solrProcess) {
+            console.log("Solr already running");
+            deferred.resolve();
+        } else {
+            processStarted = true;
+            try {
+                createSolrClient().then(function() {
+                    solrClient.ping(function(err, obj) {
+                        if (!err) {
+                            console.log("Solr server already online");
+                            solrProcess = {
+                                status: "no access to solr process"
+                            };
+                            deferred.resolve();
+                        } else {
+                            console.log("Starting solr");
+                            solrProcess = exec(solrCommand, {
+                                cwd: sorlPath,
+                                maxBuffer: 1024 * 500
+                            }, function(error, stdout, stderr) {
+                                if (error)
+                                    throw error;
+                            });
 
-            solrProcess.on('error', function(code) {
-                throw 'Solr error: ' + code;
-            });
+                            var first = true;
+                            solrProcess.stdout.on('data', function(data) {
+                                if (first) {
+                                    first = false;
+                                    createSolrClient().then(function() {
+                                        pingUntilSuccess(deferred);
+                                    });
+                                }
+                            });
 
-            solrProcess.on('exit', function(code) {
-                console.log('Solr process exited with code ' + code);
-            });
+                            solrProcess.on('error', function(code) {
+                                throw 'Solr error: ' + code;
+                            });
 
-        } catch (err) {
-            console.log("Error starting Solr: " + err);
-            deferred.reject(err);
+                            solrProcess.on('exit', function(code) {
+                                console.log('Solr process exited with code ' + code);
+                            });
+
+                        }
+                    });
+                });
+
+            } catch (err) {
+                console.log("Error starting Solr: " + err);
+                deferred.reject(err);
+            }
         }
     }
-
-    return deferred.promise;
+    startSolrPromise = deferred.promise;
+    return startSolrPromise;
 };
 
 function pingUntilSuccess(deferred) {
     solrClient.ping(function(err, obj) {
         if (err) {
-            console.log(err);
+            console.log("Solr ping refused");
             setTimeout(function() {
                 pingUntilSuccess(deferred)
-            }, 500);
+            }, 1000);
         } else {
-            console.log(obj);
+            console.log("Solr ping accepted");
             deferred.resolve();
         }
     });
