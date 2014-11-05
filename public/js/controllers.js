@@ -24,6 +24,11 @@ controller('MyCtrl1', function($scope, $http, socket, solrClient) {
 
   solrClient.then(function(solrServices) {
     console.log('Init: ' + solrServices.test);
+
+    solrServices.queryPost('android').then(function(result) {
+      console.log(result);
+    });
+
   });
 }).
 controller('MyCtrl2', function($scope) {
