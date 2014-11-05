@@ -25,10 +25,12 @@ angular.module('myApp.controllers', []).
         $scope.queryPost = function (query) {
             console.log(query);
             solrClient.then(function (solrServices) {
-                console.log('Init: ' + solrServices.test);
 
                 solrServices.queryPost(query).then(function (result) {
                     console.log(result);
+
+                    $scope.queryResults = result.response.docs;
+                    console.log($scope.queryResults.length);
                 });
 
             });

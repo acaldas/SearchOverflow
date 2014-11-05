@@ -133,7 +133,7 @@ function createSolrClient() {
 
 exports.querySolr = function(query) {
     var deferred = Q.defer();
-
+    query = '"' + query + '"';
     var query2 = solrClient.createQuery()
         .set(encodeURI('q=Title:' + query + ' OR Body:' + query))
         .start(0)
