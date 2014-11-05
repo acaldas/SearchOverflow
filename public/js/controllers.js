@@ -22,14 +22,18 @@ controller('MyCtrl1', function($scope, $http, socket, solrClient) {
     $scope.name = data.name;
   });
 
-  solrClient.then(function(solrServices) {
-    console.log('Init: ' + solrServices.test);
+  $scope.queryPost = function(query) {
+    solrClient.then(function(solrServices) {
+      console.log('Init: ' + solrServices.test);
 
-    solrServices.queryPost('android').then(function(result) {
-      console.log(result);
+      solrServices.queryPost(query).then(function(result) {
+        console.log(result);
+      });
+
     });
 
-  });
+  }
+
 }).
 controller('MyCtrl2', function($scope) {
   // write Ctrl here
