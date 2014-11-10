@@ -193,6 +193,37 @@ exports.checkAutoComplete = function(query) {
     return deferred.promise;
 }
 
+exports.getPost = function(id) {
+    var deferred = Q.defer();
+    var query2 = solrClient.createQuery()
+        .q('id:'+id+' OR ' + 'ParentId:'+id)
+        .sort('Score desc');
+
+    solrClient.search(query2, function(err, obj) {
+        if (err) {
+            deferred.reject();
+            console.log(err);
+        } else {
+            var docs = obj.response.docs;
+            var response = {
+                question: {},
+                answers: []
+            }
+            docs.forEach(function(doc){
+                if(doc.PostTypeId == 1)
+                    response.question = doc;
+                else if(doc.PostTypeId == 2)
+                    response.answers.push(doc);
+            });
+
+            deferred.resolve(response);
+            console.log(obj);
+        }
+    });
+
+    return deferred.promise;
+}
+
 /*
 exports.uploadFile = function(filePath, format, contentType) {
     var deferred = Q.defer();

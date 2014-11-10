@@ -31,6 +31,17 @@ factory('solrClient', function(socket, $q, $http) {
             });
 
             return deferred.promise;
+        },
+        getPost: function(id) {
+            var deferred = $q.defer();
+
+            socket.emit('solr:getpost', id);
+
+            socket.on('solr:getpostResult', function(result) {
+                deferred.resolve(result);
+            });
+
+            return deferred.promise;
         }
     };
 

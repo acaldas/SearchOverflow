@@ -26,6 +26,13 @@ exports.socket = function socket(socket) {
             socket.emit('solr:autocompleteResult', result);
         });
     });
+
+    socket.on('solr:getpost', function(id) {
+
+        solrClient.getPost(id).then(function(result) {
+            socket.emit('solr:getpostResult', result);
+        });
+    });
 }
 
 exports.solrReady = function(solr) {
