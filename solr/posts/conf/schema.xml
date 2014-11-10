@@ -123,7 +123,7 @@
    <field name="id" type="string" indexed="true" stored="true" required="true" multiValued="false" />
    <field name="PostTypeId" type="int" indexed="true" stored="true"/>
    <field name="AcceptedAnswerId" type="int" indexed="true" stored="true"/>
-   <field name="ParentID" type="int" indexed="true" stored="true"/>
+   <field name="ParentId" type="int" indexed="true" stored="true"/>
    <field name="CreationDate" type="string" indexed="true" stored="true"/>
    <field name="Score" type="int" indexed="true" stored="true"/>
    <field name="ViewCount" type="int" indexed="true" stored="true"/>
@@ -137,6 +137,16 @@
    <field name="CommentCount" type="int" indexed="true" stored="true"/>
    <field name="FavoriteCount" type="int" indexed="true" stored="true"/>
    <field name="ClosedDate" type="string" indexed="true" stored="true"/>
+
+   <field name="Title_split" type="text_auto" indexed="true" stored="true" multiValued="false" />
+
+   <copyField source="Title" dest="Title_split" />
+    <fieldType name="text_auto" class="solr.TextField">
+     <analyzer>
+      <tokenizer class="solr.KeywordTokenizerFactory"/>
+      <filter class="solr.LowerCaseFilterFactory"/>
+     </analyzer>
+    </fieldType>
    <!--
      Some fields such as popularity and manu_exact could be modified to
      leverage doc values:

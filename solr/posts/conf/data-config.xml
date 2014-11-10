@@ -6,7 +6,7 @@
             <field column="id" xpath="/posts/row/@Id" />
             <field column="PostTypeId" xpath="/posts/row/@PostTypeId"/>
            <field column="AcceptedAnswerId" xpath="/posts/row/@AcceptedAnswerId"/>
-           <field column="ParentID" xpath="/posts/row/@ParentID"/>
+           <field column="ParentId" xpath="/posts/row/@ParentId"/>
            <field column="CreationDate" xpath="/posts/row/@CreationDate"/>
            <field column="Score" xpath="/posts/row/@Score"/>
            <field column="ViewCount" xpath="/posts/row/@ViewCount"/>
