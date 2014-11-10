@@ -133,9 +133,24 @@ function createSolrClient() {
 
 exports.querySolr = function(query) {
     var deferred = Q.defer();
-    query = '"' + query + '"';
     var query2 = solrClient.createQuery()
-        .set(encodeURI('q=Title:' + query + ' OR Body:' + query))
+        .edismax()
+        .q(query)
+        .qf({
+                Title: 1.0,
+                Body: 1.0
+            })
+        .mm(1)
+        .qs(2)
+        .pf({
+                Title: 10.0,
+                Body: 10.0
+            })
+        .ps(2)
+        .set(encodeURI('pf2=Title^5 Body^5'))
+        .set(encodeURI('ps2=1'))
+        .set(encodeURI('pf3=Title^7 Body^7'))
+        .set(encodeURI('ps3=1'))
         .start(0)
         .rows(10);
 
