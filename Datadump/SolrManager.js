@@ -167,7 +167,31 @@ exports.querySolr = function(query) {
     return deferred.promise;
 }
 
+exports.checkAutoComplete = function(query) {
+    var deferred = Q.defer();
+    var query2 = solrClient.createQuery()
+        .facet(
+            {
+                on: true,
+                field: 'Title',
+                prefix: query,
+                limit: 10
+            }
+        )
+        .rows(0);
 
+    solrClient.search(query2, function(err, obj) {
+        if (err) {
+            deferred.reject();
+            console.log(err);
+        } else {
+            deferred.resolve(obj);
+            console.log(obj);
+        }
+    });
+
+    return deferred.promise;
+}
 
 /*
 exports.uploadFile = function(filePath, format, contentType) {

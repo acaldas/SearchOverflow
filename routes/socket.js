@@ -19,6 +19,13 @@ exports.socket = function socket(socket) {
             socket.emit('solr:queryResult', result);
         });
     });
+
+    socket.on('solr:autocomplete', function(query) {
+
+        solrClient.checkAutoComplete(query).then(function(result) {
+            socket.emit('solr:autocompleteResult', result);
+        });
+    });
 }
 
 exports.solrReady = function(solr) {

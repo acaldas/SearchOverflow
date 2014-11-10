@@ -1,12 +1,7 @@
 <div class="container">
     <div id="custom-search-input">
         <div class="input-group col-md-12">
-            <input type="text" class="search-query form-control" ng-model="queryText" placeholder="Search" ng-change="queryPost(queryText)"/>
-            <span class="input-group-btn">
-                <button class="btn btn-danger" type="button" ng-click="queryPost(queryText)">
-                    <span class="glyphicon glyphicon-search"></span>
-                </button>
-            </span>
+        <autocomplete ng-model="queryText" data="queryAutocompleteResults"></autocomplete>
         </div>
     </div>
 </div>
