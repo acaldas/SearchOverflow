@@ -60,17 +60,17 @@
     font-family: 'Open Sans', sans-serif;
     font-weight: 700;
     /* IE10 Consumer Preview */ 
-    background-image: -ms-linear-gradient(bottom, #74B0E5 0%, #3E6E99 100%);
+    background-image: -ms-linear-gradient(bottom, #B4DBFF 0%, #3E6E99 100%);
     /* Mozilla Firefox */ 
-    background-image: -moz-linear-gradient(bottom, #74B0E5 0%, #3E6E99 100%);
+    background-image: -moz-linear-gradient(bottom, #B4DBFF 0%, #3E6E99 100%);
     /* Opera */ 
-    background-image: -o-linear-gradient(bottom, #74B0E5 0%, #3E6E99 100%);
+    background-image: -o-linear-gradient(bottom, #B4DBFF 0%, #3E6E99 100%);
     /* Webkit (Safari/Chrome 10) */ 
-    background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #74B0E5), color-stop(1, #3E6E99));
+    background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #B4DBFF), color-stop(1, #3E6E99));
     /* Webkit (Chrome 11+) */ 
-    background-image: -webkit-linear-gradient(bottom, #74B0E5 0%, #3E6E99 100%);
+    background-image: -webkit-linear-gradient(bottom, #B4DBFF 0%, #3E6E99 100%);
     /* W3C Markup, IE10 Release Preview */ 
-    background-image: linear-gradient(to top, #74B0E5 0%, #3E6E99 100%);
+    background-image: linear-gradient(to top, #B4DBFF 0%, #3E6E99 100%);
 }
 
 #custom-search-input button {
@@ -95,4 +95,10 @@
 body {
     font-family: 'Open Sans', sans-serif;
     font-weight: 400;
+    background-color: #B4DBFF;
+}
+
+.transp {
+    background-color: rgba(197,198,212,0.25);
+    max-width: 1116px;
 }
