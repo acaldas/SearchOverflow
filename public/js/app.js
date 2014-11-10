@@ -4,6 +4,7 @@
 
 angular.module('myApp', [
   'ngRoute',
+  'ngSanitize',
   'myApp.controllers',
   'myApp.filters',
   'myApp.services',

@@ -1,31 +1,33 @@
-<div class="container-fluid">
-    <div class="row" style="padding-left: 10px">
-        <h1 class="glossy-text">
-            <div>SearchOverflow</div>
-        </h1>
+<div class="container">
+    <div id="custom-search-input">
+        <div class="input-group col-md-12">
+            <input type="text" class="search-query form-control" ng-model="queryText" placeholder="Search" ng-change="queryPost(queryText)"/>
+            <span class="input-group-btn">
+                <button class="btn btn-danger" type="button" ng-click="queryPost(queryText)">
+                    <span class="glyphicon glyphicon-search"></span>
+                </button>
+            </span>
+        </div>
+    </div>
+</div>
 
-        <hr>
-
-        <div class="container">
-            <div id="custom-search-input">
-                <div class="input-group col-md-12">
-                    <input type="text" class="search-query form-control" ng-model="queryText" placeholder="Search" ng-change="queryPost(queryText)"/>
-                <span class="input-group-btn">
-                    <button class="btn btn-danger" type="button" ng-click="queryPost(queryText)">
-                        <span class="glyphicon glyphicon-search"></span>
-                    </button>
-                </span>
+<div class="container">
+    <div class="panel-group" id="accordion" >
+        <div ng-repeat="result in queryResults" class="row"style="padding: 20px 0px;">
+            <div  class="panel panel-default" id="heading{{$index}}">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-target="#collapse{{$index}}" href="#collapse{{$index}}">
+                            {{result.Title}}
+                        </a>
+                    </h4>
                 </div>
-            </div>
-            <div class="row">
-
-                <div ng-repeat="result in queryResults">
-                    <h3>{{result.Title}}</h3>
+                <div id="collapse{{$index}}" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <p ng-bind-html="result.Body"></p>
+                    </div>
                 </div>
-
             </div>
         </div>
     </div>
-
-
 </div>
