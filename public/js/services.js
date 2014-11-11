@@ -10,14 +10,15 @@ angular.module('myApp.services', []).
 
         var ready = false;
         var solrServices = {
-            queryPost: function (q, start, rows) {
+            queryPost: function (q, start, rows, sort) {
                 var deferred = $q.defer();
-
+                console.log("sort " + sort);
                 socket.emit('solr:query',
                     {
                         q: q,
                         start: start,
-                        rows: rows
+                        rows: rows,
+                        sort: sort
                     });
 
                 socket.on('solr:queryResult', function (result) {

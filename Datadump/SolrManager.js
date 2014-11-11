@@ -132,10 +132,12 @@ function createSolrClient() {
 }
 
 exports.querySolr = function(query) {
+    console.log("Received query");
     var deferred = Q.defer();
     var query2 = solrClient.createQuery()
         .edismax()
         .q(query.q)
+        .set(encodeURI('sort=' + query.sort + ' desc'))
         .qf({
                 Title: 1.0,
                 Body: 1.0

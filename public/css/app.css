@@ -36,6 +36,7 @@
 }
 
 .glossy-text {
+    color: rgba(231,76,60,0.8);
     text-align: center;
     font-size: 80px;
     font-weight: bold;
@@ -111,9 +112,8 @@ body {
 .result span.close-icon {
     float: right;
     font-size: 20px;
+    color: #E74C3C;
 }
-
-
 
 .result .panel-heading {
     padding: 15px 20px;
@@ -146,6 +146,79 @@ body {
     line-height: 1.5em;
 }
 
+.search-config {
+    width: 90%;
+    margin: auto;
+}
+
+.search-status {
+    position: relative;
+    min-height: 78px;
+}
+
+.search-status h3 {
+    float: left;
+    text-shadow: 0px 1px 1px #4d4d4d;
+    padding: 0.7em;
+    padding-bottom: 0px;
+    font-size: 38px;
+    font-weight: bold;
+    margin-top: 0px;
+    margin-left: 20px;
+}
+
+.search-status span.red-text {
+    color: #E74C3C;
+    text-shadow: 0px 1px 1px #4d4d4d;
+}
+
+#spinner {
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    width: 64px;
+    height: 64px;
+    margin-left: -32px;
+    z-index: 10;
+}
+.search-config .sort-tabs {
+    float: right;
+}
+
+.search-config .sort-text {
+    float: left;
+    padding: 0.4em;
+    font-size: 28px;
+    font-weight: bold;
+    text-shadow: 0px 1px 1px #4d4d4d;
+}
+
+.search-config ul{
+    list-style: none;
+    display: inline;
+}
+
+.search-config ul li{
+    float: left;
+    padding: 1em;
+    background-color: #2980B9;
+    font-size: 18px;
+    font-weight: bold;
+    border: 1px solid rgba(0,0,0,0.4);
+    cursor: pointer;
+    text-shadow: 0px 1px 1px #4d4d4d;
+}
+
+.search-config ul li:hover, .search-config ul li.active{
+    background-color: rgba(231,76,60,1);
+}
+.search-config ul li:first-child {
+    border-right-width: 0px;
+}
+
+.search-config ul li:last-child {
+    border-left-width: 0px;
+}
 
 /******* VIEW POST *******/
 
@@ -182,3 +255,45 @@ body {
     width: 80%;
     padding: 2em;
 }
+
+/**** Animations ****/
+.ng-hide-add, .ng-hide-remove {
+    /* ensure visibility during the transition */
+    display: block !important; /* yes, important */
+}
+
+.cssFade {
+    transition: 0.5s linear all;
+    opacity: 1;
+}
+.cssFade.ng-hide {
+    opacity: 0;
+}
+
+.repeat-animation.ng-enter,
+.repeat-animation.ng-leave,
+.repeat-animation.ng-move,
+.enter-animation.ng-enter {
+  -webkit-transition:0.3s linear all;
+  transition:0.5s linear all;
+}
+
+/* ending enter and move styling
+   (this is what the element will animate from */
+.enter-animation.ng-enter,
+.repeat-animation.ng-enter,
+.repeat-animation.ng-move { opacity:0; }
+
+/* ending enter and move styling
+   (this is what the element will animate towards */
+.enter-animation.ng-enter.ng-enter-active,
+.repeat-animation.ng-enter.ng-enter-active,
+.repeat-animation.ng-move.ng-move-active { opacity:1; }
+
+/* starting leave animation */
+.enter-animation.ng-leave,
+.repeat-animation.ng-leave { opacity:1; }
+
+/* ending leave animation */
+.enter-animation.ng-leave.ng-leave-active,
+.repeat-animation.ng-leave.ng-leave-active { opacity:0; }

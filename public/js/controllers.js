@@ -9,10 +9,12 @@ controller('AppCtrl', function($scope) {
 controller('MyCtrl1', function($scope, $http, socket, solrClient) {
 
     $scope.queryPost = function(query, start, rows) {
+        $scope.loading = true;
         solrClient.then(function(solrServices) {
-            solrServices.queryPost(query, start, rows).then(function(result) {
+            solrServices.queryPost(query, start, rows, $scope.currentTab).then(function(result) {
                 console.log("query: " + query);
                 console.log(result);
+                $scope.loading = false;
                 $scope.queryResults = result.response.docs;
                 if(!$scope.currentIndex) {
                     $scope.currentIndex = result.response.docs.length;
@@ -28,6 +30,7 @@ controller('MyCtrl1', function($scope, $http, socket, solrClient) {
 
     $scope.queryAutocompleteResults = [];
     $scope.queryText = '';
+    $scope.loading = false;
 
     $scope.$watch('queryText', function(query) {
         if (query.length) {
@@ -59,9 +62,35 @@ controller('MyCtrl1', function($scope, $http, socket, solrClient) {
     $scope.maxIndex = 0;
     $scope.getMoreResults = function() {
         var rows = $scope.currentIndex + $scope.indexIncrement;
-        if($scope.queryText.length)
+        if($scope.queryText.length && rows <= $scope.maxIndex)
             $scope.queryPost($scope.queryText, $scope.currentIndex, rows);
     };
+
+
+    $scope.tabs = [{
+            title: 'Relevance',
+            sort: 'score'
+        }, {
+            title: 'Score',
+            sort: 'Score'
+        }, {
+            title: 'Recent',
+            sort: 'CreationDate'
+    }];
+
+    $scope.currentTab = 'score';
+
+    $scope.onClickTab = function (tab) {
+        $scope.currentTab = tab.sort;
+        $scope.currentIndex = 0;
+        $scope.indexIncrement = 0;
+        $scope.maxIndex = 0;
+        $scope.queryPost($scope.queryText, 0, 10);
+    }
+
+    $scope.isActiveTab = function(tabSort) {
+        return tabSort === $scope.currentTab;
+    }
 
 }).
 controller('MyCtrl2', function($scope, solrClient) {

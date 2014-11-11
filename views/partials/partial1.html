@@ -12,15 +12,30 @@
 </div>
 
 <div class="container">
+    <div class="clearfix search-config">
+        <div class="sort-tabs">
+            <span class="sort-text">Sort by:</span>
+            <ul>
+                <li ng-repeat="tab in tabs"
+                    ng-class="{active:isActiveTab(tab.sort)}"
+                    ng-click="onClickTab(tab)">{{tab.title}}</li>
+
+            </ul>
+            </div>
+    </div>
+    <div class="search-status clearfix">
+        <img class="cssFade" id="spinner" ng-src="img/spinner.gif" ng-show="loading" width="64px" height="64px">
+        <h3 ng-if="queryResults.length && !loading" class="enter-animation"><span class="red-text">{{maxIndex}}</span> Posts found:</h3>
+    </div>
     <div class="panel-group transp results" id="accordion" infinite-scroll="getMoreResults()" infinite-scroll-immediate-check="false" infinite-scroll-distance="1">
-        <div ng-repeat="result in queryResults" class="row" style="padding: 20px 50px 0px;">
+        <div ng-repeat="result in queryResults" class="row repeat-animation" style="padding: 20px 50px 0px;">
             <div class="result panel panel-default" id="heading{{$index}}">
                 <div class="clearfix panel-heading" ng-click="getPost(result.id)" data-toggle="collapse"
                      data-target="#collapse{{$index}}">
                     <h4 class="panel-title">
                         <a ng-if="result.Title.length" data-toggle="collapse" data-target="#collapse{{$index}}"
                            href="view2?questionId={{result.id}}">
-                            {{result.Title}}
+                             {{result.Title}}
                         </a>
                         <a ng-if="!result.Title.length"data-toggle="collapse" data-target="#collapse{{$index}}"
                            href="view2?questionId={{result.ParentId}}">

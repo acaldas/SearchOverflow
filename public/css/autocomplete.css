@@ -3,6 +3,7 @@
 .autocomplete{
   width: 100%;
   position: relative;
+  margin-left: 1%;
 }
 
 .autocomplete input{
@@ -13,6 +14,21 @@
   color: #E74C3C;
 }
 
+.autocomplete input::-webkit-input-placeholder { /* WebKit browsers */
+    color:    rgba(231,76,60,0.8);
+}
+.autocomplete input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color:    rgba(231,76,60,0.8);
+   opacity:  1;
+}
+.autocomplete input::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color:    rgba(231,76,60,0.8);
+   opacity:  1;
+}
+.autocomplete input:-ms-input-placeholder { /* Internet Explorer 10+ */
+   color:    rgba(231,76,60,0.8);
+}
+
 .autocomplete ul{
   position: absolute;
   left: 0;
@@ -21,7 +37,7 @@
   border-right: 1px solid #888;
   border-bottom: 1px solid #888;
   padding-left: 10px;
-  z-index: 1;
+  z-index: 2;
   background-color: rgba(255,255,255,0.9);
 }
 
