@@ -35,6 +35,14 @@
     padding: 0;
 }
 
+.glossy-text {
+    text-align: center;
+    font-size: 80px;
+    font-weight: bold;
+    padding: 20px;
+    text-shadow: 0px 1px 1px #4d4d4d;
+}
+
 #custom-search-input .search-query {
     padding-right: 3px;
     padding-right: 4px \9;
