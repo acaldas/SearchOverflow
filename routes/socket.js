@@ -6,22 +6,34 @@
 var solrClient = null;
 
 exports.socket = function socket(socket) {
-    socket.on('solr:ask', function() {
+    socket.on('solr:ask', function () {
         if (solrClient) {
             socket.emit('solr:ready');
         }
     });
 
 
-    socket.on('solr:query', function(query) {
+    socket.on('solr:query', function (query) {
 
-        solrClient.querySolr(query).then(function(result) {
+        solrClient.querySolr(query).then(function (result) {
             socket.emit('solr:queryResult', result);
+        });
+    });
+
+    socket.on('solr:queryPostById', function (query) {
+        solrClient.queryPostById(query).then(function (result) {
+            socket.emit('solr:queryPostByIdResult', result);
+        });
+    });
+
+    socket.on('solr:queryAnswers', function (query) {
+        solrClient.queryAnswers(query).then(function (result) {
+            socket.emit('solr:answersResult', result);
         });
     });
 }
 
-exports.solrReady = function(solr) {
+exports.solrReady = function (solr) {
     solrClient = solr;
     if (solrClient)
         socket.emit('solr:ready');

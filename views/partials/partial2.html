@@ -1,1 +1,38 @@
-<p> This is the partial for view 2.</p>
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-md-10 col-sm-10 col-lg-10 panel panel-primary"
+             style="border: solid 1px;margin-top: 10px;margin-left: 3%;width: 94%">
+
+            <h2><strong>{{queryResults[0].Title}}</strong><span
+                    class="pull-right badge">Score: {{queryResults[0].Score}}</span></h2>
+            <hr>
+            <p ng-bind-html="queryResults[0].Body"></p>
+
+        </div>
+
+
+    </div>
+
+    <hr>
+
+    <div class="container">
+
+
+        <div class="row" ng-repeat="result in answersResult | orderBy:'Score' :true">
+
+            <div class="col-md-9 col-sm-9 col-lg-9 panel panel-warning"
+                 style="border: solid 1px;margin-top: 10px;margin-left: 3%;width: 94%">
+
+                <h2><strong>On: {{result.CreationDate}}</strong><span
+                        class="pull-right badge">Score: {{result.Score}}</span></h2>
+                <hr>
+                <p ng-bind-html="result.Body"></p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

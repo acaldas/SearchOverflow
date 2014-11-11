@@ -13,11 +13,11 @@
 
 <div class="container">
     <div class="panel-group transp" id="accordion" >
-        <div ng-repeat="result in queryResults" class="row" style="padding: 20px 50px 0px;">
+        <div ng-repeat="result in queryResults | filter : {PostTypeId : 1}" class="row" style="padding: 20px 50px 0px;">
             <div  class="panel panel-default" id="heading{{$index}}" style="width: 1050px">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-target="#collapse{{$index}}">
+                        <a data-toggle="collapse" data-target="#collapse{{$index}}" href="view2?questionId={{result.id}}">
                             {{result.Title}}
                         </a>
                     </h4>
