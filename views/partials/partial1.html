@@ -1,22 +1,29 @@
 <div class="container">
     <div id="custom-search-input">
         <div class="input-group col-md-12">
-        <autocomplete ng-model="queryText" data="queryAutocompleteResults"></autocomplete>
+            <autocomplete ng-model="queryText" data="queryAutocompleteResults"></autocomplete>
+            <span class="input-group-btn">
+                    <button class="btn btn-danger" type="button">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </button>
+                </span>
         </div>
     </div>
 </div>
 
 <div class="container">
-    <div class="panel-group transp results" id="accordion" >
+    <div class="panel-group transp results" id="accordion">
         <div ng-repeat="result in queryResults" class="row" style="padding: 20px 50px 0px;">
             <div class="result panel panel-default" id="heading{{$index}}">
-                <div class="clearfix panel-heading" ng-click="getPost(result.id)" data-toggle="collapse" data-target="#collapse{{$index}}">
+                <div class="clearfix panel-heading" ng-click="getPost(result.id)" data-toggle="collapse"
+                     data-target="#collapse{{$index}}">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-target="#collapse{{$index}}" href="view2?questionId={{result.id}}">
+                        <a data-toggle="collapse" data-target="#collapse{{$index}}"
+                           href="view2?questionId={{result.id}}">
                             {{result.Title}}
                         </a>
                     </h4>
-                     <span class="close-icon glyphicon glyphicon-chevron-up"></span>
+                    <span class="close-icon glyphicon glyphicon-chevron-up"></span>
                 </div>
                 <div id="collapse{{$index}}" class="panel-collapse collapse in">
                     <div class="panel-body">
