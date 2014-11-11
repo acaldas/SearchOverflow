@@ -4,18 +4,42 @@
         <div class="container">
             <div class="question panel panel-primary">
                 <div class="clearfix">
-                    <h2>
-                    <strong>{{queryResults[0].Title}}</strong>
-                     <div class="score-badge pull-right">
-                        <span style="font-size: 20px">Score:</span>
-                        <span class="badge">{{queryResults[0].Score}}</span>
-                    </div>
-                    </h2>
-                </div>
-                <hr>
-                <p class="post-text" ng-bind-html="queryResults[0].Body"></p>
+                    <h2 class="panel-heading">
+                        <strong>{{queryResults[0].Title}}</strong>
 
+                        <div class="score-badge pull-right">
+                            <span style="font-size: 20px">Score:</span>
+                            <span class="badge">{{queryResults[0].Score}}</span>
+                        </div>
+                    </h2>
+                    <hr>
+                </div>
+
+                <div class="panel-body">
+                    <p class="post-text" ng-bind-html="queryResults[0].Body"></p>
+                </div>
+                <div class="panel-footer bg-info">
+                    <table class="table table-striped">
+                        <caption>Comments</caption>
+                        <tbody>
+                        <tr ng-repeat="comment in queryResults[0].comments">
+                            <!--<th></th>-->
+                            <td>
+                                <p class="col-lg-10 col-md-10 col-sm-10" ng-bind-html="comment.Text">
+                                </p>
+                            </td>
+                            <td>
+                                <span class="pull-right">{{comment.CreationDate | date:'yyyy-MM-dd HH:mm:ss'}}</span>
+                            </td>
+                        </tr>
+
+
+                        </tbody>
+                    </table>
+
+                </div>
             </div>
+
 
         </div>
     </div>
@@ -27,16 +51,44 @@
         <div class="row" ng-repeat="result in answersResult | orderBy:'Score' :true">
 
             <div class="panel panel-warning answer">
+                <div class="panel-heading">
+                    <h2>
+                        <strong>On: {{result.CreationDate | date:'yyyy-MM-dd HH:mm:ss'}}</strong>
 
-                <h2>
-                    <strong>On: {{result.CreationDate | date:'yyyy-MM-dd HH:mm:ss'}}</strong>
-                    <div class="score-badge pull-right">
-                        <span style="font-size: 20px">Score:</span>
-                        <span class="badge">{{result.Score}}</span>
-                    </div>
-                </h2>
-                <hr>
-                <p class="post-text" ng-bind-html="result.Body"></p>
+                        <div class="score-badge pull-right">
+                            <span style="font-size: 20px">Score:</span>
+                            <span class="badge">{{result.Score}}</span>
+                        </div>
+                    </h2>
+
+                </div>
+
+                <!--<hr>-->
+                <div class="panel-body">
+                    <p class="post-text" ng-bind-html="result.Body"></p>
+
+                </div>
+                <div class="panel-footer bg-info">
+                    <table class="table table-striped">
+                        <caption>Comments</caption>
+                        <tbody>
+                        <tr ng-repeat="comment in result.comments">
+                            <!--<th></th>-->
+                            <td>
+                                <p class="col-lg-10 col-md-10 col-sm-10" ng-bind-html="comment.Text">
+                                </p>
+                            </td>
+                            <td>
+                                <span class="pull-right">{{comment.CreationDate | date:'yyyy-MM-dd HH:mm:ss'}}</span>
+                            </td>
+                        </tr>
+
+
+                        </tbody>
+                    </table>
+
+
+                </div>
 
             </div>
 

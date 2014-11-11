@@ -9,6 +9,7 @@ module.exports = function api(solrClient, socket) {
         socket.solrReady(solrClient);
     });
 
+
     this.name = function(req, res) {
         res.json({
             name: 'Bob'

@@ -73,6 +73,18 @@ angular.module('myApp.services', []).
                 });
 
                 return deferred.promise;
+            },
+
+            queryComments: function (q) {
+                var deferred = $q.defer();
+
+                socket.emit('solr:queryComments', q);
+
+                socket.on('solr:commentsResult', function (result) {
+                    deferred.resolve(result);
+                });
+
+                return deferred.promise;
             }
         };
 
