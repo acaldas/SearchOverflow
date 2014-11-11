@@ -34,8 +34,7 @@
                      data-target="#collapse{{$index}}">
                     <h4 class="panel-title">
                         <a ng-if="result.Title.length" data-toggle="collapse" data-target="#collapse{{$index}}"
-                           href="view2?questionId={{result.id}}">
-                             {{result.Title}}
+                           href="view2?questionId={{result.id}}"  ng-bind-html="result.Title | highlight:queryText">
                         </a>
                         <a ng-if="!result.Title.length"data-toggle="collapse" data-target="#collapse{{$index}}"
                            href="view2?questionId={{result.ParentId}}">
@@ -46,7 +45,7 @@
                 </div>
                 <div id="collapse{{$index}}" class="panel-collapse collapse in">
                     <div class="panel-body">
-                        <p class="result-body" ng-bind-html="result.Body"></p>
+                        <p class="result-body" ng-bind-html="result.Body | highlight:queryText"></p>
                             <a ng-if="result.Title.length" type="button" class="btn btn-default pull-right see-more" href="view2?questionId={{result.id}}">
                                 See more
                             </a>

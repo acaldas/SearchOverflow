@@ -45,6 +45,8 @@
     cursor: pointer;
 }
 
+.highlight { background: rgba(255,255,0,0.3); }
+
 #custom-search-input .search-query {
     padding-right: 3px;
     padding-right: 4px \9;
