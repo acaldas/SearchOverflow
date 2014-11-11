@@ -1,17 +1,20 @@
 <div class="container-fluid">
 
     <div class="row">
-        <div class="col-md-10 col-sm-10 col-lg-10 panel panel-primary"
-             style="border: solid 1px;margin-top: 10px;margin-left: 3%;width: 94%">
-
-            <h2><strong>{{queryResults[0].Title}}</strong><span
-                    class="pull-right badge">Score: {{queryResults[0].Score}}</span></h2>
+        <div class="container">
+        <div class="question panel panel-primary">
+            <div class="clearfix">
+                <h2 class="pull-left">
+                <strong>{{queryResults[0].Title}}</strong>
+                </h2>
+                <span class="pull-right badge">Score: {{queryResults[0].Score}}</span>
+            </div>
             <hr>
-            <p ng-bind-html="queryResults[0].Body"></p>
+            <p class="post-text" ng-bind-html="queryResults[0].Body"></p>
 
         </div>
 
-
+</div>
     </div>
 
     <hr>
@@ -21,13 +24,12 @@
 
         <div class="row" ng-repeat="result in answersResult | orderBy:'Score' :true">
 
-            <div class="col-md-9 col-sm-9 col-lg-9 panel panel-warning"
-                 style="border: solid 1px;margin-top: 10px;margin-left: 3%;width: 94%">
+            <div class="panel panel-warning answer">
 
-                <h2><strong>On: {{result.CreationDate}}</strong><span
+                <h2><strong>On: {{result.CreationDate | date:'yyyy-MM-dd HH:mm:ss'}}</strong><span
                         class="pull-right badge">Score: {{result.Score}}</span></h2>
                 <hr>
-                <p ng-bind-html="result.Body"></p>
+                <p class="post-text" ng-bind-html="result.Body"></p>
 
             </div>
 

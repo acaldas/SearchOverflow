@@ -105,13 +105,7 @@ body {
     font-size: 20px;
 }
 
-.results .result:first-child {
-    margin-top: 40px;
-}
 
-.results .result:last-child {
-    margin-bottom: 40px;
-}
 
 .result .panel-heading {
     padding: 15px 20px;
@@ -137,4 +131,41 @@ body {
 
 .result-body p{
     line-height: 1.5em;
+}
+
+
+/******* VIEW POST *******/
+
+.question {
+    border: solid 1px;
+    margin: auto;
+    margin-top: 10px;
+    padding: 2em;
+    width: 90%
+}
+
+.question h2, .answer h2 {
+    margin-top: 0px;
+}
+
+.post-text {
+    font-weight: normal;
+    font-size: 18px;
+    text-align: justify;
+    line-height: 1.5em;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.badge {
+    font-size: 18px;
+    padding: 0.4em;
+}
+
+.answer {
+     border: solid 1px;
+    margin: auto;
+    margin-top: 10px;
+    width: 80%;
+    padding: 2em;
 }

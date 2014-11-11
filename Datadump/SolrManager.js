@@ -135,7 +135,7 @@ exports.querySolr = function(query) {
     var deferred = Q.defer();
     var query2 = solrClient.createQuery()
         .edismax()
-        .q(query)
+        .q(query.q)
         .qf({
                 Title: 1.0,
                 Body: 1.0
@@ -151,8 +151,8 @@ exports.querySolr = function(query) {
         .set(encodeURI('ps2=1'))
         .set(encodeURI('pf3=Title^7 Body^7'))
         .set(encodeURI('ps3=1'))
-        .start(0)
-        .rows(10);
+        .start(query.start)
+        .rows(query.rows);
 
     solrClient.search(query2, function (err, obj) {
         if (err) {

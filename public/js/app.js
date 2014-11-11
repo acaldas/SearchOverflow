@@ -10,7 +10,8 @@ angular.module('myApp', [
   'myApp.services',
   'myApp.directives',
   'btford.socket-io',
-  'autocomplete'
+  'autocomplete',
+  'infinite-scroll'
 ]).
 config(function ($routeProvider, $locationProvider) {
   $routeProvider.
