@@ -59,8 +59,8 @@ controller('MyCtrl1', function($scope, $http, socket, solrClient) {
     $scope.maxIndex = 0;
     $scope.getMoreResults = function() {
         var rows = $scope.currentIndex + $scope.indexIncrement;
-        console.log("get more: " + $scope.currentIndex + " - " + rows);
-        $scope.queryPost($scope.queryText, $scope.currentIndex, rows);
+        if($scope.queryText.length)
+            $scope.queryPost($scope.queryText, $scope.currentIndex, rows);
     };
 
 }).

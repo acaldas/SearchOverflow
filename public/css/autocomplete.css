@@ -6,9 +6,11 @@
 }
 
 .autocomplete input{
-  font-size: 1.2em;
+  font-size: 2em;
   width: 100%;
-  padding:0.4em;
+  padding: 0.5em;
+  padding-left: 1em;
+  color: #E74C3C;
 }
 
 .autocomplete ul{
@@ -24,6 +26,7 @@
 }
 
 .autocomplete li{
+  font-size: 1.5em;
   text-align: left;
   list-style:none;
   width: 100%;
