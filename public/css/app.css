@@ -42,6 +42,7 @@
     font-weight: bold;
     padding: 20px;
     text-shadow: 0px 4px 20px #4d4d4d;
+    cursor: pointer;
 }
 
 #custom-search-input .search-query {
@@ -222,6 +223,10 @@ body {
 
 /******* VIEW POST *******/
 
+.post-container {
+    background-color: #3498DB;
+}
+
 .question {
     border: solid 1px;
     margin: auto;
@@ -232,6 +237,8 @@ body {
 
 .question h2, .answer h2 {
     margin-top: 0px;
+    font-weight: bold;
+    color: #E74C3C;
 }
 
 .post-text {
@@ -244,8 +251,10 @@ body {
 }
 
 .badge {
-    font-size: 18px;
+    font-size: 20px;
+    font-weight: bold;
     padding: 0.4em;
+    background-color: rgba(231,76,60,0.9);
 }
 
 .answer {

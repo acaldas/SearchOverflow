@@ -3,7 +3,13 @@
 /* Controllers */
 
 angular.module('myApp.controllers', []).
-controller('AppCtrl', function($scope) {
+controller('AppCtrl', function($scope, $location) {
+
+    $scope.goHome = function() {
+        console.log('aaa');
+        $location.url('view1');
+    }
+
 
 }).
 controller('MyCtrl1', function($scope, $http, socket, solrClient) {
@@ -82,10 +88,12 @@ controller('MyCtrl1', function($scope, $http, socket, solrClient) {
 
     $scope.onClickTab = function (tab) {
         $scope.currentTab = tab.sort;
-        $scope.currentIndex = 0;
-        $scope.indexIncrement = 0;
-        $scope.maxIndex = 0;
-        $scope.queryPost($scope.queryText, 0, 10);
+        if($scope.queryText.length) {
+            $scope.currentIndex = 0;
+            $scope.indexIncrement = 0;
+            $scope.maxIndex = 0;
+            $scope.queryPost($scope.queryText, 0, 10);
+        }
     }
 
     $scope.isActiveTab = function(tabSort) {
