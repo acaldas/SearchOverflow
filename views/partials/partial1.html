@@ -1,30 +1,26 @@
 <div class="container">
     <div id="custom-search-input">
         <div class="input-group col-md-12">
-            <input type="text" class="search-query form-control" ng-model="queryText" placeholder="Search" ng-change="queryPost(queryText)"/>
-            <span class="input-group-btn">
-                <button class="btn btn-danger" type="button" ng-click="queryPost(queryText)">
-                    <span class="glyphicon glyphicon-search"></span>
-                </button>
-            </span>
+        <autocomplete ng-model="queryText" data="queryAutocompleteResults"></autocomplete>
         </div>
     </div>
 </div>
 
 <div class="container">
-    <div class="panel-group transp" id="accordion" >
-        <div ng-repeat="result in queryResults | filter : {PostTypeId : 1}" class="row" style="padding: 20px 50px 0px;">
-            <div  class="panel panel-default" id="heading{{$index}}" style="width: 1050px">
-                <div class="panel-heading">
+    <div class="panel-group transp results" id="accordion" >
+        <div ng-repeat="result in queryResults" class="row" style="padding: 20px 50px 0px;">
+            <div class="result panel panel-default" id="heading{{$index}}">
+                <div class="clearfix panel-heading" ng-click="getPost(result.id)" data-toggle="collapse" data-target="#collapse{{$index}}">
                     <h4 class="panel-title">
                         <a data-toggle="collapse" data-target="#collapse{{$index}}" href="view2?questionId={{result.id}}">
                             {{result.Title}}
                         </a>
                     </h4>
+                     <span class="close-icon glyphicon glyphicon-chevron-up"></span>
                 </div>
                 <div id="collapse{{$index}}" class="panel-collapse collapse in">
                     <div class="panel-body">
-                        <p ng-bind-html="result.Body"></p>
+                        <p class="result-body" ng-bind-html="result.Body"></p>
                     </div>
                 </div>
             </div>

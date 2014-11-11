@@ -9,7 +9,8 @@ angular.module('myApp', [
   'myApp.filters',
   'myApp.services',
   'myApp.directives',
-  'btford.socket-io'
+  'btford.socket-io',
+  'autocomplete'
 ]).
 config(function ($routeProvider, $locationProvider) {
   $routeProvider.
