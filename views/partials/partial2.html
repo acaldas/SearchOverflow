@@ -18,18 +18,20 @@
                 <div class="panel-body">
                     <p class="post-text" ng-bind-html="queryResults[0].Body"></p>
                 </div>
-                <div class="panel-footer bg-info" ng-if="queryResults[0].comments.length">
+
+            </div>
+                <div class="comments" ng-if="queryResults[0].comments.length">
                     <table class="table table-striped">
-                        <caption>Comments</caption>
+                        <h4>Comments</h4>
                         <tbody>
                         <tr ng-repeat="comment in queryResults[0].comments">
                             <!--<th></th>-->
                             <td>
-                                <p class="col-lg-10 col-md-10 col-sm-10" ng-bind-html="comment.Text">
+                                <p class="col-lg-10 col-md-10 col-sm-10 comment-text" ng-bind-html="comment.Text">
                                 </p>
                             </td>
                             <td>
-                                <span class="pull-right">{{comment.CreationDate | date:'yyyy-MM-dd HH:mm:ss'}}</span>
+                                <span ng-if="comment.CreationDate" class="pull-right">{{comment.CreationDate | date:'yyyy-MM-dd HH:mm:ss'}}</span>
                             </td>
                         </tr>
 
@@ -38,15 +40,18 @@
                     </table>
 
                 </div>
-            </div>
-
 
         </div>
     </div>
 
 
     <div class="container">
-
+        <div ng-if="answersResult.length" class="row">
+            <h3 class="answers-info"><span class="red-text">{{answersResult.length}}</span> Answers:</h3>
+        </div>
+        <div ng-if="!answersResult.length" class="row">
+            <h3 class="answers-info">No answers</h3>
+        </div>
 
         <div class="row" ng-repeat="result in answersResult | orderBy:'Score' :true">
 
@@ -68,18 +73,20 @@
                     <p class="post-text" ng-bind-html="result.Body"></p>
 
                 </div>
-                <div class="panel-footer bg-info"  ng-if="result.comments.length">
+
+            </div>
+            <div class="answer-comments comments" ng-if="result.comments.length">
                     <table class="table table-striped">
-                        <caption>Comments</caption>
+                        <h4>Comments</h4>
                         <tbody>
                         <tr ng-repeat="comment in result.comments">
                             <!--<th></th>-->
                             <td>
-                                <p class="col-lg-10 col-md-10 col-sm-10" ng-bind-html="comment.Text">
+                                <p class="col-lg-10 col-md-10 col-sm-10 comment-text" ng-bind-html="comment.Text">
                                 </p>
                             </td>
                             <td>
-                                <span class="pull-right">{{comment.CreationDate | date:'yyyy-MM-dd HH:mm:ss'}}</span>
+                                <span ng-if="comment.CreationDate" class="pull-right">{{comment.CreationDate | date:'yyyy-MM-dd HH:mm:ss'}}</span>
                             </td>
                         </tr>
 
@@ -87,11 +94,7 @@
                         </tbody>
                     </table>
 
-
                 </div>
-
-            </div>
-
         </div>
 
     </div>

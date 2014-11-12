@@ -159,10 +159,10 @@ controller('MyCtrl2', function($scope, solrClient) {
                 var comments = result.response.docs;
                 comments.forEach(function(comment) {
                     comment.CreationDate = Date.parse(comment.CreationDate);
+                    console.log(comment.CreationDate)
                 });
 
                 obj.comments = comments;
-                console.log("HEEEEEEEELLLLLLO " + obj);
             });
 
         });

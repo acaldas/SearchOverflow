@@ -146,7 +146,8 @@ exports.querySolr = function (query) {
         .set(encodeURI('sort=' + query.sort + ' desc'))
         .qf({
             Title: 1.0,
-            Body: 1.0
+            Body: 1.0,
+            Tags: 1.0
         })
         .mm(1)
         .qs(2)

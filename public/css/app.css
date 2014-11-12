@@ -256,7 +256,7 @@ body {
     font-size: 20px;
     font-weight: bold;
     padding: 0.4em;
-    background-color: rgba(231,76,60,0.9);
+    background-color: rgba(231,76,60,0.9) !important;
 }
 
 .answer {
@@ -265,6 +265,48 @@ body {
     margin-top: 10px;
     width: 80%;
     padding: 2em;
+}
+
+h3.answers-info {
+    padding: 1em;
+    padding-bottom: 0em;
+    font-size: 32px;
+    text-shadow: 0px 1px 1px #4d4d4d;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+h3.answers-info span.red-text{
+    color: #E74C3C;
+    text-shadow: 0px 1px 1px #4d4d4d;
+}
+hr.black {
+    margin: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-top: 1px solid rgba(0,0,0,0.2);
+}
+
+.comments {
+    background-color: white;
+    width: 80%;
+    margin: auto;
+}
+
+.answer-comments {
+    width: 70%;
+}
+.comments h4{
+    padding: 1em ;
+    text-align: center ;
+    margin: 0px;
+    font-weight: bold;
+}
+
+.comment-text{
+    text-align: justify;
+  padding: 1em;
+  width: 100%;
 }
 
 /**** Animations ****/
