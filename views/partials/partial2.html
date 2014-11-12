@@ -18,7 +18,7 @@
                 <div class="panel-body">
                     <p class="post-text" ng-bind-html="queryResults[0].Body"></p>
                 </div>
-                <div class="panel-footer bg-info">
+                <div class="panel-footer bg-info" ng-if="queryResults[0].comments.length">
                     <table class="table table-striped">
                         <caption>Comments</caption>
                         <tbody>
@@ -68,7 +68,7 @@
                     <p class="post-text" ng-bind-html="result.Body"></p>
 
                 </div>
-                <div class="panel-footer bg-info">
+                <div class="panel-footer bg-info"  ng-if="result.comments.length">
                     <table class="table table-striped">
                         <caption>Comments</caption>
                         <tbody>

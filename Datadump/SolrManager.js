@@ -138,7 +138,7 @@ function createSolrClient() {
 }
 
 exports.querySolr = function (query) {
-    console.log("Received query");
+    console.log("Received query: "+ query);
     var deferred = Q.defer();
     var query2 = solrClient.createQuery()
         .edismax()
@@ -176,13 +176,15 @@ exports.querySolr = function (query) {
 }
 
 exports.checkAutoComplete = function (query) {
+    console.log("Received autocomplete: "+ query);
     var deferred = Q.defer();
     var query2 = solrClient.createQuery()
+        .q('Title:'+query)
         .facet(
         {
             on: true,
             field: 'Title',
-            prefix: query,
+            prefix: query.toLowerCase(),
             limit: 10
         }
     )

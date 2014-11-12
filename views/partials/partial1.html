@@ -25,7 +25,7 @@
     </div>
     <div class="search-status clearfix">
         <img class="cssFade" id="spinner" ng-src="img/spinner.gif" ng-show="loading" width="64px" height="64px">
-        <h3 ng-if="queryResults.length && !loading" class="enter-animation"><span class="red-text">{{maxIndex}}</span> Posts found:</h3>
+        <h3 ng-if="queryText.length && !loading" class="enter-animation"><span class="red-text">{{maxIndex}}</span> Posts found<span ng-if="queryResults.length">:</span></h3>
     </div>
     <div class="panel-group transp results" id="accordion" infinite-scroll="getMoreResults()" infinite-scroll-immediate-check="false" infinite-scroll-distance="1">
         <div ng-repeat="result in queryResults" class="row repeat-animation" style="padding: 20px 50px 0px;">
